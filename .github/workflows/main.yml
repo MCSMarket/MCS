@@ -39,7 +39,10 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git tag -a ${{ steps.semver.outputs.version }} -m "Generated tag from GitHub Actions"
-          git push origin ${{ steps.semver.outputs.version }}
+          TIMESTAMP=$(date +'%Y%m%d%H%M%S')
+          TAG_NAME="${{ steps.semver.outputs.version }}-${TIMESTAMP}"
+          git tag -a $TAG_NAME -m "Generated tag from GitHub Actions"
+          git push origin $TAG_NAME
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
