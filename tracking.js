@@ -38,7 +38,6 @@ class HolisticTracking {
 
 		if (!this.dynamicData) return;
 
-
 		const data = {
 			'event': 'dynamic_event',
 			'event_name': 'company_angezeigt',
@@ -51,7 +50,7 @@ class HolisticTracking {
 		}
 
 		this.pushEvent(data)
-
+		
 	}
 
 	clickEvents(selector, data) {
