@@ -1,4 +1,5 @@
 class HolisticTracking {
+	
 	constructor(dynamicData) {
 		window.dataLayer = window.dataLayer || [];
 		this.dynamicData = dynamicData;
@@ -7,6 +8,8 @@ class HolisticTracking {
 		this.getChannelGrouping();
 		this.landingPageView();
 	}
+
+	// Event Listeners
 
 	addEventListeners() {
 		// ISIN Copy Button
@@ -34,6 +37,8 @@ class HolisticTracking {
 		})
 	}
 
+	// Comnpay Landing Page View
+
 	landingPageView() {
 
 		if (!this.dynamicData) return;
@@ -52,6 +57,8 @@ class HolisticTracking {
 		this.pushEvent(data)
 
 	}
+
+	// Click Events
 
 	clickEvents(selector, data) {
 		const clickTriggers = document.querySelectorAll(`${selector}`);
