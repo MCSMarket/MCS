@@ -1,5 +1,5 @@
 class HolisticTracking {
-	
+
 	constructor(dynamicData) {
 		window.dataLayer = window.dataLayer || [];
 		this.dynamicData = dynamicData;
@@ -101,6 +101,8 @@ class HolisticTracking {
 			
 		};
 	}
+
+	// Push DataLayer Event
 
 	pushEvent(data) {
 		window.dataLayer.push(data);
