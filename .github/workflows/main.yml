@@ -60,3 +60,11 @@ jobs:
           draft: false
           prerelease: false
           body: "Neue Version ${{ steps.create_tag.outputs.tag_name }}"
+
+  purge-jsdelivr-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: gacts/purge-jsdelivr-cache@v1
+        with:
+          url: |
+            https://cdn.jsdelivr.net/gh/mmg-marketmedium/HolisticTracking@latest/tracking.min.js
