@@ -34,8 +34,14 @@ class HolisticTracking {
 
 		// Press Release Click Event
 		this.clickEvents('[data-id="pressrelease"]', {
-			"eventCategory": "Analyse",
-			"eventAction": "press_release_teaser_click"
+			"eventAction": "press_release_teaser_click",
+			"brand": ""
+		})
+
+		// Article Click Event
+		this.clickEvents('[data-articlelink]', {
+			"eventAction": "article_teaser_click",
+			"brand": ""
 		})
 	}
 
@@ -105,6 +111,8 @@ class HolisticTracking {
 			});
 		});
 	}
+
+	
 
 	copyEventData(value, brand, action, placement, labelType = 'ISIN') {
 
