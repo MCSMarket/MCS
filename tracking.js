@@ -184,7 +184,7 @@ class HolisticTracking {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-	console.log("UPDATED SUCCESSFULLY")
+	console.log("UPDATED SUCCESSFULLY Udpated");
 	if (typeof dynamicData == "undefined") {
 		const dynamicData = false;
 		const HolisticTrackingInstance = new HolisticTracking(false);
