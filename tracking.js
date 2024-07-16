@@ -42,7 +42,7 @@ class HolisticTracking {
 		const data = {
 			'event': 'dynamic_event',
 			'event_name': 'company_angezeigt',
-			'name': this.dynamicData.conpany,
+			'name': this.dynamicData.company,
 			'WKN': this.dynamicData.wkn,
 			'kurs': this.dynamicData.currentShare,
 			'branche': this.dynamicData.branche,
