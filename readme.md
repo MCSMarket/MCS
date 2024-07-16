@@ -1,5 +1,28 @@
 # Globales Trackingsetup
 
+## Consent Mode V2 (Globales Script):
+In den Header Code folgendes Snippet einfügen:
+
+```html
+<script data-cookieconsent="ignore">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag("consent", "default", {
+        ad_personalization: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500,
+    });
+    gtag("set", "ads_data_redaction", true);
+</script>
+```
+
 ## Dynamische Daten:
 Auf den CMS Templates werden über das Code-Snippet "dynamicData" die Daten zum Unternehmen an die Page übergeben.
 

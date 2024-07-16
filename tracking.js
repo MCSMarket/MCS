@@ -1,12 +1,14 @@
 class HolisticTracking {
 
-	constructor(dynamicData) {
+	constructor(dynamicData = false, trackingData = false) {
 		window.dataLayer = window.dataLayer || [];
 		this.dynamicData = dynamicData;
+		this.trackingData = trackingData;
 
 		this.addEventListeners();
 		this.getChannelGrouping();
 		this.landingPageView();
+		this.newsletterRegistration();
 	}
 
 	// Event Listeners
@@ -55,6 +57,22 @@ class HolisticTracking {
 		}
 
 		this.pushEvent(data)
+
+	}
+
+	// Newsletter Registration
+
+	newsletterRegistration() { 
+
+		if (!this.trackingData) return
+		
+		this.pushEvent({
+			'event': 'dynamic_event',
+			'event_name': this.trackingData.event,
+			'brand': this.trackingData.brand,
+			'event_cluster': 'newsletter',
+			'event_audience': 'high_intent',
+		})
 
 	}
 
@@ -184,11 +202,14 @@ class HolisticTracking {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-	console.log("UPDATED");
+	if(typeof trackingData == "undefined") {
+		const trackingData = false;
+	}
 	if (typeof dynamicData == "undefined") {
 		const dynamicData = false;
-		const HolisticTrackingInstance = new HolisticTracking(false);
+		const HolisticTrackingInstance = new HolisticTracking(false, trackingData);
 	} else {
-		const HolisticTrackingInstance = new HolisticTracking(dynamicData);
+		
+		const HolisticTrackingInstance = new HolisticTracking(dynamicData, trackingData);
 	}
 });
