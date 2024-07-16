@@ -1,3 +1,19 @@
-- name: Git Semantic Version
-  uses: PaulHatch/semantic-version@v5.4.0
-            
+name: Semantic Versioning
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  semantic-versioning:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Semantic Versioning
+        uses: paulhatch/semantic-version@latest
+        with:
+          bump_each_commit: true
+          branch_prefixes: '{"main":"", "develop":"pre"}'
