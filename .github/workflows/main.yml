@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Semantic Versioning
-        uses: paulhatch/semantic-version@v3.2.0
+        uses: paulhatch/semantic-version@v5.3.0
         with:
           bump_each_commit: true
           branch_prefixes: '{"main":"", "develop":"pre"}'
