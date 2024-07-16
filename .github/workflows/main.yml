@@ -24,7 +24,7 @@ jobs:
           major_regexp_flags: ""
           minor_pattern: "(MINOR)"
           minor_regexp_flags: ""
-          version_format: "${major}.${minor}.${patch}-prerelease${increment}"
+          version_format: "${major}.${minor}.${patch}-release-${increment}"
           change_path: "src/my-service"
           namespace: my-service
           bump_each_commit: true
