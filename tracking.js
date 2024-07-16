@@ -50,7 +50,7 @@ class HolisticTracking {
 		}
 
 		this.pushEvent(data)
-		
+
 	}
 
 	clickEvents(selector, data) {
@@ -86,8 +86,6 @@ class HolisticTracking {
 		return {
 			'event': 'dynamic_event',
 			'event_name': action,
-			'eventCategory': 'MicroConversion',
-			'eventAction': action,
 			[labelType]: value,
 			'placement': placement,
 			'brand': brand,
