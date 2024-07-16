@@ -118,6 +118,8 @@ class HolisticTracking {
 		localStorage.setItem(key, value);
 	}
 
+	// Channel Grouping
+
 	getChannelGrouping() {
 
 		const channelInfos = {
