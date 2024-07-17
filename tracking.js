@@ -149,7 +149,6 @@ class HolisticTracking {
 				this.pushEvent({
 					"event": "dynamic_event",
 					"event_name": "navbar_click",
-					"categroy": this.dynamicData.category,
 					"brand": this.dynamicData.brand,
 					"event_cluster": "click",
 					"event_audience": "mid_intent",
