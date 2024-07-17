@@ -309,6 +309,8 @@ class HolisticTracking {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
+
+
 	
 	if(typeof trackingData == "undefined") {
 		trackingData = false;
