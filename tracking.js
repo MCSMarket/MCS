@@ -9,6 +9,7 @@ class HolisticTracking {
 		this.getChannelGrouping();
 		this.landingPageView();
 		this.newsletterRegistration();
+		this.companyPageView();
 	}
 
 	// Event Listeners
@@ -29,20 +30,58 @@ class HolisticTracking {
 		// Overlay Click Event
 		this.clickEvents('#overlay', {
 			"eventCategory": "Analyse",
-			"eventAction": "company_overlay"
+			"eventAction": "company_overlay",
+			"audience": "mid_intent"
 		});
 
 		// Press Release Click Event
 		this.clickEvents('[data-id="pressrelease"]', {
 			"eventAction": "press_release_teaser_click",
-			"brand": ""
+			"brand": this.dynamicData.brand,
+			"audience": "mid_intent"
 		})
 
 		// Article Click Event
 		this.clickEvents('[data-articlelink]', {
 			"eventAction": "article_teaser_click",
-			"brand": ""
+			"brand": this.dynamicData.brand,
+			"audience": "low_intent"
 		})
+
+		// Research Click Event
+		this.clickEvents('[data-id="research"]', {
+			"eventAction": "research_teaser_click",
+			"brand": this.dynamicData.brand,
+			"audience": "mid_intent"
+		})
+
+		// Company Link Click Event
+		this.clickEvents('[data-id="companylink"]', {
+			"eventAction": "company_portrait_click",
+			"brand": this.dynamicData.brand,
+			"audience": "high_intent"
+		})
+
+		// Investorenpräsentation Click event
+		this.clickEvents('[data-id="presentation"]', {
+			"eventAction": "unternhemenspraesentation",
+			"brand": this.dynamicData.brand,
+			"audience": "high_intent"
+		})
+
+		// Breadcrumb Click Event
+		this.plainClickEvents('[data-breadcrumb]', {
+			"event": "dynamic_event",
+			"event_name": "breadcrumb_click",
+			"level": this.dynamicData.breadcrumb,
+			"event_cluster": "click",
+			"categroy": this.dynamicData.category,	
+			"brand": this.dynamicData.brand,
+			"event_audience": "low_intent"
+		}, 'level', 'data-breadcrumb')
+
+		// NavBar Click Event
+		this.navClickEvents('nav a')
 	}
 
 	// Comnpay Landing Page View
@@ -65,6 +104,25 @@ class HolisticTracking {
 		this.pushEvent(data)
 
 	}
+	// Compay Portrait View
+
+	companyPageView() {
+
+		if (!this.dynamicData || !this.dynamicData.isCompany) return;
+
+		const data = {
+			'event': 'dynamic_event',
+			'event_name': 'company_portrait_angezeigt',
+			'company': this.dynamicData.company,
+			'WKN': this.dynamicData.wkn,
+			'brand': this.dynamicData.brand,
+			'event_cluster': 'behavior',
+			'event_audience': 'mid_intent',
+		}
+
+		this.pushEvent(data)
+
+	}
 
 	// Newsletter Registration
 
@@ -82,6 +140,48 @@ class HolisticTracking {
 
 	}
 
+	// Nav Click Event
+
+	navClickEvents(selector) { 
+		const items = document.querySelectorAll(`${selector}`);
+		items.forEach(link => {
+			link.addEventListener('click', (e) => {				
+				this.pushEvent({
+					"event": "dynamic_event",
+					"event_name": "navbar_click",
+					"categroy": this.dynamicData.category,
+					"brand": this.dynamicData.brand,
+					"event_cluster": "click",
+					"event_audience": "mid_intent",
+					"url": e.target.href,	
+					"click_text": e.target.innerText,
+				})					
+				
+			})
+		})
+	
+	}
+	// Plain Click Event
+
+	plainClickEvents(selector, data, extraData = false, extraDataValue = false) { 
+		const items = document.querySelectorAll(`${selector}`);
+		items.forEach(link => {
+			link.addEventListener('click', (e) => {
+				if (extraData === false) {
+					this.pushEvent(data)
+					
+				} else { 
+					this.pushEvent({
+						...data,
+						[extraData]: link.getAttribute(extraDataValue),
+					})
+					
+				}
+			})
+		})
+	
+	}
+
 	// Click Events
 
 	clickEvents(selector, data) {
@@ -96,7 +196,7 @@ class HolisticTracking {
 					"WKN": this.dynamicData.wkn,
 					"url": e.target.href,
 					"event_cluster": "click",
-					"event_audience": "low_intent",
+					"event_audience": data.audience ? data.audience : "low_intent",
 				});
 			});
 		});
