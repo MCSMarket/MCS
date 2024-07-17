@@ -54,3 +54,5 @@ copyEventData(value, brand, action, placement, labelType = 'ISIN') {
 
 
 Script zum Einbinden: ``https://cdn.jsdelivr.net/gh/mmg-marketmedium/HolisticTracking@latest/tracking.min.js``
+
+Link zum Purgen des CDN Caches: https://www.jsdelivr.com/tools/purge
