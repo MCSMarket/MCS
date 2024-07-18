@@ -68,6 +68,12 @@ class HolisticTracking {
 			"brand": this.dynamicData.brand,
 			"audience": "high_intent"
 		})
+		// Investorenpräsentation Click event
+		this.clickEvents('[linktype="presentation"]', {
+			"eventAction": "unternhemenspraesentation",
+			"brand": this.dynamicData.brand,
+			"audience": "high_intent"
+		})
 
 		// Breadcrumb Click Event
 		this.plainClickEvents('[data-breadcrumb]', {
