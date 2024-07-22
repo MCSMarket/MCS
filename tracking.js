@@ -2,8 +2,9 @@ class HolisticTracking {
 
 	constructor(dynamicData = false, trackingData = false) {
 		window.dataLayer = window.dataLayer || [];
-		this.dynamicData = dynamicData;
+		this.dynamicData = window.dynamicData || {};
 		this.trackingData = trackingData;
+		this.devMode = window.devMode || false;
 
 		this.addEventListeners();
 		this.getChannelGrouping();
@@ -236,8 +237,9 @@ class HolisticTracking {
 	// Push DataLayer Event
 
 	pushEvent(data) {
-		window.dataLayer.push(data);
 		console.log(window.dataLayer);
+		if (this.devMode) return;
+		window.dataLayer.push(data);
 	}
 
 	getUrlParams(paramName) {
@@ -321,8 +323,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 	if(typeof trackingData == "undefined") {
 		trackingData = false;
 	}
-	if (typeof dynamicData == "undefined") {
-		const dynamicData = false;
+	if (typeof window.dynamicData == "undefined") {
+		window.dynamicData = false;
 		const HolisticTrackingInstance = new HolisticTracking(false, trackingData);
 	} else {
 		
