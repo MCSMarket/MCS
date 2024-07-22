@@ -237,7 +237,7 @@ class HolisticTracking {
 	// Push DataLayer Event
 
 	pushEvent(data) {
-		console.log(window.dataLayer);
+		console.log(window.dataLayer, data);
 		if (this.devMode) return;
 		window.dataLayer.push(data);
 	}
