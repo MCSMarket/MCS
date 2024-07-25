@@ -89,6 +89,26 @@ class HolisticTracking {
 
 		// NavBar Click Event
 		this.navClickEvents('nav a')
+
+		this.clickOutEvents('[data-clickout=""]', {
+			"eventAction": "click_out",
+			"audience": "low_intent"
+		})
+
+		this.clickOutEvents('[data-clickout="finanz-link"]', {
+			"eventAction": "click_out_finanzseite",
+			"audience": "high_intent"
+		})
+
+		this.clickOutEvents('[data-clickout="broker-link"]', {
+			"eventAction": "click_out_broker",
+			"audience": "high_intent"
+		})
+
+		this.clickOutEvents('[data-clickout="social-link"]', {
+			"eventAction": "click_out_social",
+			"audience": "high_intent"
+		})
 	}
 
 	// Comnpay Landing Page View
@@ -167,6 +187,26 @@ class HolisticTracking {
 		})
 	
 	}
+
+
+	clickOutEvents(selector, data) { 
+		const items = document.querySelectorAll(`${selector}`);
+		items.forEach(link => {
+			link.addEventListener('click', (e) => {
+				this.pushEvent({
+					"event": "dynamic_event",
+					"event_name": data.eventAction,
+					"brand": this.dynamicData.brand,
+					"company": this.dynamicData.company,
+					"placement": link.dataset.placement,
+					"WKN": this.dynamicData.wkn,
+					"event_cluster": "click",
+					"event_audience": data.audience ? data.audience : "low_intent",
+				})
+			})
+		})
+	}
+
 	// Plain Click Event
 
 	plainClickEvents(selector, data, extraData = false, extraDataValue = false) { 
