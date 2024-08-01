@@ -67,4 +67,4 @@ jobs:
       - uses: gacts/purge-jsdelivr-cache@v1
         with:
           url: |
-            https://cdn.jsdelivr.net/gh/mmg-marketmedium/HolisticTracking@latest/tracking.min.js
+            https://cdn.jsdelivr.net/gh/MCSMarketing/MCS@latest/tracking.min.js
