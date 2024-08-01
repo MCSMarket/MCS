@@ -53,6 +53,8 @@ copyEventData(value, brand, action, placement, labelType = 'ISIN') {
 Über die Queryparameter werden die Parameter `` utm_source, utm_campaign, msclkid, gclid und campaignid `` abgefragt und entsprechen den Kanälen zugeordnet. Sofern eine Zuordnung durchgeführt werden konnte, werden die Daten über den Key ``channelInfos`` in den localStorage gespeichert
 
 
-Script zum Einbinden: ``https://cdn.jsdelivr.net/gh/mmg-marketmedium/HolisticTracking@latest/tracking.min.js``
+Scripts zum Einbinden: 
+``https://cdn.jsdelivr.net/gh/mmg-marketmedium/HolisticTracking@latest/tracking.min.js``
+``https://cdn.jsdelivr.net/gh/MCSMarketing/MCS@latest/tracking.min.js``
 
 Link zum Purgen des CDN Caches: https://www.jsdelivr.com/tools/purge
