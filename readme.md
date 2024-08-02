@@ -58,6 +58,7 @@ Scripts zum Einbinden:
 ``https://cdn.jsdelivr.net/gh/mmg-marketmedium/HolisticTracking@latest/tracking.min.js``
 
 ``https://cdn.jsdelivr.net/gh/2do-digital/HolisticTracking@latest/tracking.min.js``
+=> aktuell bei MCS eingebunden
 
 ``https://cdn.jsdelivr.net/gh/MCSMarket/MCS@latest/tracking.min.js``
 
