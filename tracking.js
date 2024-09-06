@@ -188,6 +188,18 @@ class HolisticTracking {
 	
 	}
 
+	directClickEvents(data) {
+		this.pushEvent({
+			"event": "dynamic_event",
+			"event_name": data.eventAction,
+			"brand": data.brand,
+			"company": this.dynamicData.company,
+			"WKN": this.dynamicData.wkn,
+			"event_cluster": "click",
+			"event_audience": data.audience ? data.audience : "low_intent",
+		})
+	 }
+
 
 	clickOutEvents(selector, data) { 
 		const items = document.querySelectorAll(`${selector}`);
