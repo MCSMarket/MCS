@@ -262,7 +262,7 @@ class HolisticTracking {
 
 	copyEvents(type, labelType = 'ISIN') {
 		const buttons = document.querySelectorAll(`a[data-copy="${type}"]`);
-		console.log(type, labelType, this.dynamicData[type])
+		// console.log(type, labelType, this.dynamicData[type])
 		buttons.forEach(button => {
 			button.addEventListener('click', (e) => {
 				this.pushEvent(this.copyEventData(this.dynamicData[type], this.dynamicData.brand, `copy_${type}`, button.dataset.place, labelType));
@@ -289,7 +289,7 @@ class HolisticTracking {
 	// Push DataLayer Event
 
 	pushEvent(data) {
-		console.log(window.dataLayer, data);
+		// console.log(window.dataLayer, data);
 		if (this.devMode) return;
 		window.dataLayer.push(data);
 	}
