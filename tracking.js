@@ -100,7 +100,7 @@ class HolisticTracking {
 			"audience": "high_intent"
 		})
 
-		this.clickOutEvents('[data-clickout="broker-link"]', {
+		this.clickOutBrokerEvents('[data-clickout="broker-link"]', {
 			"eventAction": "click_out_broker",
 			"audience": "high_intent"
 		})
@@ -207,6 +207,27 @@ class HolisticTracking {
 			link.addEventListener('click', (e) => {
 				this.pushEvent({
 					"event": "dynamic_event",
+					"event_name": data.eventAction,
+					"brand": this.dynamicData.brand,
+					"company": this.dynamicData.company,
+					"placement": link.dataset.placement,
+					"WKN": this.dynamicData.wkn,
+					"event_cluster": "click",
+					"event_audience": data.audience ? data.audience : "low_intent",
+				})
+			})
+		})
+	}
+
+
+	clickOutBrokerEvents(selector, data) { 
+		const items = document.querySelectorAll(`${selector}`);
+		items.forEach(link => {
+			const brokerName = link.querySelector('.text-size-small').innerText;
+			link.addEventListener('click', (e) => {
+				this.pushEvent({
+					"event": "dynamic_event",
+					"broker": brokerName,
 					"event_name": data.eventAction,
 					"brand": this.dynamicData.brand,
 					"company": this.dynamicData.company,
