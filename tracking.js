@@ -228,7 +228,7 @@ class HolisticTracking {
 				if(!brokerName) return;
 				this.pushEvent({
 					"event": "dynamic_event",
-					"broker": brokerName,
+					"event_type": brokerName,
 					"event_name": data.eventAction,
 					"brand": this.dynamicData.brand,
 					"company": this.dynamicData.company,
