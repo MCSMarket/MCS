@@ -223,8 +223,8 @@ class HolisticTracking {
 	clickOutBrokerEvents(selector, data) { 
 		const items = document.querySelectorAll(`${selector}`);
 		items.forEach(link => {
-			const brokerName = link.querySelector('.text-size-small').innerText;
 			link.addEventListener('click', (e) => {
+				const brokerName = link.querySelector('.text-size-small').innerText !== 'Externer Link' ? link.querySelector('.text-size-small').innerText : link.href;
 				this.pushEvent({
 					"event": "dynamic_event",
 					"broker": brokerName,
