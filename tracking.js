@@ -225,6 +225,7 @@ class HolisticTracking {
 		items.forEach(link => {
 			link.addEventListener('click', (e) => {
 				const brokerName = link.querySelector('.text-size-small').innerText !== 'Externer Link' ? link.querySelector('.text-size-small').innerText : link.href;
+				console.log(brokerName);
 				this.pushEvent({
 					"event": "dynamic_event",
 					"broker": brokerName,
