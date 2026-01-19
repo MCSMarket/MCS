@@ -1,21 +1,38 @@
 class HolisticTracking {
 
 	constructor(dynamicData = false, trackingData = false) {
+		// Singleton Pattern - verhindert mehrfache Instanziierung
+		if (window.holisticTrackingInstance) {
+			console.warn('HolisticTracking: Instance already exists. Returning existing instance.');
+			return window.holisticTrackingInstance;
+		}
+
 		window.dataLayer = window.dataLayer || [];
 		this.dynamicData = window.dynamicData || {};
 		this.trackingData = trackingData;
 		this.devMode = window.devMode || false;
+		this.eventListenersAttached = false;
 
 		this.addEventListeners();
 		this.getChannelGrouping();
 		this.landingPageView();
 		this.newsletterRegistration();
 		this.companyPageView();
+
+		// Speichere Instanz
+		window.holisticTrackingInstance = this;
 	}
 
 	// Event Listeners
 
 	addEventListeners() {
+		// Verhindere doppelte Event Listener Registration
+		if (this.eventListenersAttached) {
+			console.warn('HolisticTracking: Event listeners already attached.');
+			return;
+		}
+		this.eventListenersAttached = true;
+
 		// ISIN Copy Button
 		this.copyEvents('isin', 'ISIN');
 
@@ -285,6 +302,12 @@ class HolisticTracking {
 	copyEvents(type, labelType = 'ISIN') {
 		const buttons = document.querySelectorAll(`a[data-copy="${type}"]`);
 		buttons.forEach(button => {
+			// Prüfe ob Event Listener bereits existiert
+			if (button.dataset.holisticTrackingAttached === 'true') {
+				return;
+			}
+			button.dataset.holisticTrackingAttached = 'true';
+
 			button.addEventListener('click', (e) => {
 				this.pushEvent(this.copyEventData(this.dynamicData[type], this.dynamicData.brand, `copy_${type}`, button.dataset.place, labelType));
 			});
@@ -310,7 +333,10 @@ class HolisticTracking {
 	// Push DataLayer Event
 
 	pushEvent(data) {
-		if (this.devMode) return;
+		if (this.devMode) {
+			console.log('HolisticTracking [DEV MODE]:', data);
+			return;
+		}
 		window.dataLayer.push(data);
 	}
 
@@ -388,18 +414,19 @@ class HolisticTracking {
 
 }
 
-window.addEventListener('DOMContentLoaded', (event) => {
+// Verhindere mehrfache Initialisierung
+if (!window.holisticTrackingInitialized) {
+	window.holisticTrackingInitialized = true;
 
-
-	
-	if(typeof trackingData == "undefined") {
-		trackingData = false;
-	}
-	if (typeof window.dynamicData == "undefined") {
-		window.dynamicData = false;
-		const HolisticTrackingInstance = new HolisticTracking(false, trackingData);
-	} else {
-		
-		const HolisticTrackingInstance = new HolisticTracking(dynamicData, trackingData);
-	}
-});
+	window.addEventListener('DOMContentLoaded', (event) => {
+		if(typeof trackingData == "undefined") {
+			trackingData = false;
+		}
+		if (typeof window.dynamicData == "undefined") {
+			window.dynamicData = false;
+			const HolisticTrackingInstance = new HolisticTracking(false, trackingData);
+		} else {
+			const HolisticTrackingInstance = new HolisticTracking(dynamicData, trackingData);
+		}
+	});
+}
